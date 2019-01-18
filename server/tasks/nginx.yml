@@ -1,0 +1,21 @@
+- name: Delete default conf nginx
+  file:
+    state: absent
+    path: "/etc/nginx/sites-enabled/default"
+
+- name: Copy Application
+  copy:
+    src: files/nginx/app.conf
+    dest: /etc/nginx/sites-available
+
+
+- name: Create symlink of new app
+  file:
+    src: /etc/nginx/sites-available/app.conf
+    dest: /etc/nginx/sites-enabled/app.conf
+    state: link
+
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted

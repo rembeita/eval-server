@@ -1,0 +1,14 @@
+- name: Install Packages
+  apt: 
+    pkg:
+      - nginx
+      - docker.io
+      - git
+      - python-pip
+      - mysql-client 
+    state: present
+    update_cache: yes
+
+- name: Install Pip packages
+  pip:
+    name: docker

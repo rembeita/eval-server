@@ -1,0 +1,6 @@
+---
+# tasks file for eval-server
+- include: packages.yml
+- include: database.yml
+- include: application.yml
+- include: nginx.yml

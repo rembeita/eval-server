@@ -1,0 +1,31 @@
+- name: Clone repository datacharmer
+  git:
+    repo: https://github.com/datacharmer/test_db
+    dest: /tmp/test_db
+
+- name: Create Mysql container
+  docker_container:
+    name: mysql
+    image: mysql:8
+    state: started
+    recreate: yes
+    exposed_ports:
+      - 3306
+    ports:
+      - "3306:3306"
+    volumes:
+      - "/data:/var/lib/mysql"
+    env:
+        MYSQL_ROOT_PASSWORD: "eval-server"
+
+- name: Copy load database shell script
+  copy:
+    src: files/loadsql.sh
+    dest: /tmp/loadsql.sh
+    owner: root
+    group: root
+    mode: 0744
+
+
+#- name: Load Database
+#  shell: "/tmp/loadsql.sh"

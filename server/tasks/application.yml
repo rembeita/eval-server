@@ -1,0 +1,22 @@
+- name: Install Pip Application packages
+  pip:
+    name: aniso8601==1.2.1, certifi==2017.4.17, chardet==3.0.4, click==6.7, Flask==0.12.2, Flask-JWT==0.3.2, Flask-RESTful==0.3.6, hvac==0.2.17, idna==2.5, itsdangerous==0.24, Jinja2==2.9.6, MarkupSafe==1.0, PyJWT==1.4.2, python-dateutil==2.6.0, pytz==2017.2, requests==2.18.1, six==1.10.0, urllib3==1.21.1, Werkzeug==0.12.2, uwsgi, flask-mysql
+
+- name: Copy Application
+  copy:
+    src: files/application/server
+    dest: /opt/
+
+- name: Copy systemd app launch
+  copy:
+    src: files/systemd/app.service
+    dest: /etc/systemd/system
+
+- name: Reload systemd configuration
+  systemd:
+    daemon_reload: yes
+
+- name: start app application
+  systemd:
+    state: started
+    name: app

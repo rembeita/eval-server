@@ -1,0 +1,13 @@
+[Unit]
+Description=app demo
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/opt/server
+Environment="PATH=/opt/server"
+ExecStart=/usr/local/bin/uwsgi --ini /opt/server/app.ini
+
+[Install]
+WantedBy=multi-user.target
