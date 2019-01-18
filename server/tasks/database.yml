@@ -27,5 +27,5 @@
     mode: 0744
 
 
-#- name: Load Database
-#  shell: "/tmp/loadsql.sh"
+- name: Load Database
+  shell: "/tmp/loadsql.sh"
